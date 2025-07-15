@@ -1,24 +1,27 @@
 import { useState } from "react";
 import Item from "./Item";
 import OrderModal from "./OrderModal";
-import { useMenu } from "../context/menuContext";
+import { useMenu } from "../context/menuContext"; 
 import { useCart } from "../context/cartContext";
 
 function Menu() {
-  const { menu } = useMenu();
+  const { menu: fullData } = useMenu(); 
+
+  const actualMenuData = fullData.menu;
+
   const { cart, setCart } = useCart();
 
   const [modalOn, setModalOn] = useState(false);
   const [modalMenu, setModalMenu] = useState(null);
 
-  if (!menu)
+  if (!actualMenuData)
     return (
       <div style={{ textAlign: "center", margin: "80px" }}>
         메뉴 정보가 없어요!
       </div>
     );
 
-  const categorys = Object.keys(menu);
+  const categorys = Object.keys(actualMenuData);
 
   return (
     <>
@@ -26,7 +29,7 @@ function Menu() {
         <section key={category}>
           <h2>{category}</h2>
           <ul className="menu">
-            {menu[category].map((item) => (
+            {actualMenuData[category].map((item) => (
               <Item
                 key={item.name}
                 item={item}

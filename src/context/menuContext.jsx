@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from "react";
-import menuData from "../assets/data/Menu"; 
+import menuData from "../assets/data"; 
 
 const MenuContext = createContext();
 
